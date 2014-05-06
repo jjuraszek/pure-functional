@@ -6,8 +6,7 @@
   [a b]
   (def euclids-max-common-denom
   	(fn [ higher lower]
-  		(let [tail (mod higher lower)]
-  			(if (= 0 tail)
-  				lower
-  				(recur lower tail)))))
-  (euclids-max-common-denom (max a b) (min a b)))
+      (if (= 0 lower)
+        higher
+        #(euclids-max-common-denom lower (mod higher lower)))))
+  (trampoline euclids-max-common-denom (max a b) (min a b)))
