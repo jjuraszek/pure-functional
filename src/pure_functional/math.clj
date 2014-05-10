@@ -1,5 +1,4 @@
-(ns pure-functional.math
-  (:gen-class))
+(ns pure-functional.math)
 
 (defn max-common-denominator
   "Count maximum number which is common denominator of two of them"
