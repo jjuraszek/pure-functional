@@ -1,10 +1,15 @@
 (ns pure-functional.find)
 
+(declare count-summing-pairs)
+
 (defn triple-to-zero
   "find number of sets of triples indexes summing to zero"
   [v]
-  (println (sort v))
-  1)
+  (let [sortedVector             (vec (sort v))
+        sortedVectorWithoutLast2 (subvec sortedVector 0 (- (count v) 2))
+        countSum                 (fn [idx item] (count-summing-pairs (subvec sortedVector (inc idx)) (* -1 item)))
+        vectorOfCounts           (keep-indexed countSum sortedVectorWithoutLast2)]
+    (reduce + vectorOfCounts)))
 
 (defn count-summing-pairs
   "find in vector count of pairs of two numbers summing to third number, input vector do not have duplicates"
